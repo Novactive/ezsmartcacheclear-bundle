@@ -1,0 +1,20 @@
+language: php
+
+php:
+  - '7.0'
+  - '7.1'
+  - '7.2'
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor
+
+install:
+  - travis_retry composer install --no-interaction
+
+script:
+  - php vendor/bin/phpcs --standard=PSR2 src
+  - php vendore/bin/phpmd src text cleancode,codesize,design,naming,unusedcode
+  - php vendor/bin/phpcpd src
+
