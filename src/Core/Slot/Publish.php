@@ -79,7 +79,7 @@ class Publish extends Slot
         );
 
         foreach ($this->getContentTypeRules($contentType) as $ruleName => $ruleConfig) {
-            if (true === $ruleConfig['enabled']) {
+            if ($ruleConfig['enabled'] === true) {
                 $this->cacheClearRules[$ruleName]->clearCache($locations, $ruleConfig);
             }
         }

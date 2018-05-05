@@ -4,6 +4,19 @@ php:
   - '7.1'
   - '7.2'
 
+env:
+  global:
+    - COVERAGE=false
+    - PHPUNIT_ARGS=''
+
+matrix:
+  fast_finish: true
+  include:
+    - php: '7.2'
+      env:
+        - COVERAGE=true
+        - PHPUNIT_ARGS="--coverage-text"
+
 cache:
   directories:
     - $HOME/.composer/cache
@@ -13,6 +26,7 @@ install:
   - travis_retry composer install --no-interaction
 
 script:
+  - php vendor/bin/phpunit ${PHPUNIT_ARGS}
   - php vendor/bin/phpcs --standard=PSR2 src
   - php vendor/bin/phpmd src text cleancode,codesize,design,naming,unusedcode
   - php vendor/bin/phpcpd src

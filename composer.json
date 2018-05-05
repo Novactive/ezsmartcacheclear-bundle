@@ -1,6 +1,6 @@
 {
     "name": "novactive/ezsmartcacheclear-bundle",
-    "description": "eZ publish Bundle providing cache clearing features",
+    "description": "eZ Platform Bundle providing cache clearing features",
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
@@ -13,6 +13,9 @@
         "psr-4": {
             "Novactive\\eZSmartCacheClearBundle\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {"Novactive\\eZSmartCacheClearBundle\\Tests\\": "tests/"}
     },
     "require": {
         "symfony/framework-bundle": "^3.0",
