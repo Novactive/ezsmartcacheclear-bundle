@@ -79,6 +79,7 @@ class PublishTest extends TestCase
         $persistenceHandler->expects($this->any())->method('contentTypeHandler')->will($this->returnValue($contentTypeHandler));
         $persistenceHandler->expects($this->any())->method('locationHandler')->will($this->returnValue($locationHandler));
 
+        $slot = new Publish($persistenceHandler, $config);
         foreach ($config as $contentTypeConfig) {
             if ($contentTypeConfig['content_type'] == $contentTypeMock->identifier) {
                 foreach ($this->rules as $ruleName => $rule) {
@@ -91,13 +92,16 @@ class PublishTest extends TestCase
                         $this->rules[$ruleName]->expects($this->never())->method('clearCache');
                     }
                 }
+            } else {
+                foreach ($this->rules as $ruleName => $rule) {
+                    $this->rules[$ruleName]->expects($this->never())->method('clearCache');
+                }
             }
         }
-
-        $slot = new Publish($persistenceHandler, $config);
         foreach ($this->rules as $ruleName => $rule) {
             $slot->addCacheClearRule($rule, $ruleName);
         }
+
         $slot->receive($signal);
     }
 
@@ -113,6 +117,7 @@ class PublishTest extends TestCase
             [[['content_type' => 'my_content_type', 'rules' => ['subtree' => ['enabled' => true]]]]],
             [[['content_type' => 'my_content_type', 'rules' => ['subtree' => ['enabled' => false]]]]],
             [[['content_type' => 'my_content_type', 'rules' => ['parents' => ['enabled' => true], 'children' => ['enabled' => true], 'siblings' => ['enabled' => true], 'subtree' => ['enabled' => true]]]]],
+            [[['content_type' => 'my_content_type_2', 'rules' => ['parents' => ['enabled' => true], 'children' => ['enabled' => true], 'siblings' => ['enabled' => true], 'subtree' => ['enabled' => true]]]]],
         ];
     }
 }
