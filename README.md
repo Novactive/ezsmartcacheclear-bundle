@@ -1,5 +1,8 @@
 # eZ (platform) Smart Cache Clear Bundle
 
+ master | [![Build Status](https://travis-ci.org/Novactive/ezsmartcacheclear-bundle.svg?branch=master)](https://travis-ci.org/Novactive/ezsiteaccessmatchers-bundle)|
+--------|---------|
+
 ## About
 
 This eZ Platform bundle intends to provide an eZ publish like smart cache clearing mechanisme.
